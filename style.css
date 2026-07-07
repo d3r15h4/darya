@@ -329,3 +329,48 @@ height:420px;
 }
 
 }
+/* FEATURED PRODUCTS */
+
+.products {
+    padding: 120px 8%;
+    background: white;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 35px;
+}
+
+.product-card {
+    transition: 0.35s;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.product-card h3 {
+    margin-top: 20px;
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.product-card p {
+    margin-top: 8px;
+    color: #777;
+    font-size: 17px;
+}
