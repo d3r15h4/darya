@@ -1,4 +1,3 @@
-# Darya
 # DARYA by Derisha
 
 A demo storefront for a modest fashion brand: abayas, dresses, sets and accessories. Built with plain HTML, CSS and JavaScript, with no frameworks or build step.
@@ -14,13 +13,16 @@ A demo storefront for a modest fashion brand: abayas, dresses, sets and accessor
 - Category pages for Abayas, Dresses, Sets and Accessories
 - Slide-out shopping bag with quantities and a free-delivery progress message
 - Bag contents saved in the browser between pages
-- Wishlist hearts on every product
+- Product pages with size selection (sizes are added to the bag)
+- Wishlist: hearts are saved in the browser and listed on the wishlist page
 
 ## Project structure
 
 ```
 index.html          Homepage
 shop.html           All products
+product.html        Product page (opened from any product, e.g. product.html?p=the-amina-abaya)
+wishlist.html       Saved items
 abayas.html         Category pages (dresses, sets and accessories work the same way)
 about.html          Brand story
 contact.html        Contact form (shows a confirmation only, does not send)
@@ -55,9 +57,7 @@ The site is hosted with GitHub Pages. Push to the main branch, and it updates wi
 
 ## Roadmap
 
-- Product detail pages with size selector
 - Size and length guide
-- Wishlist page
 - Filters (size, colour, price range)
 - Real checkout (Stripe Payment Links or Shopify Buy Button)
 - Working contact form and email signup
