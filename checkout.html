@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Checkout | DARYA by Derisha</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="style.css"></head>
+<body data-solid>
+<section class="section checkout-wrap">
+  <form id="co" class="co-form">
+    <h1>Checkout</h1>
+    <h2>Contact</h2>
+    <input type="email" name="email" placeholder="Email address" aria-label="Email address" required>
+    <h2>Delivery address</h2>
+    <input type="text" placeholder="Full name" aria-label="Full name" required>
+    <input type="text" placeholder="Address" aria-label="Address" required>
+    <div class="two"><input type="text" placeholder="City" aria-label="City" required><input type="text" placeholder="Postcode" aria-label="Postcode" required></div>
+    <input type="tel" placeholder="Phone (optional)" aria-label="Phone">
+    <h2>Delivery method</h2>
+    <label class="opt"><span><input type="radio" name="ship" value="standard" checked> Standard, 3 to 5 working days</span><span>£3.99, free over £75</span></label>
+    <label class="opt"><span><input type="radio" name="ship" value="express"> Next-day delivery</span><span>£6.99</span></label>
+    <h2>Payment</h2>
+    <div class="pay-box">
+      <span class="pay"><i class="fa-brands fa-cc-visa"></i><i class="fa-brands fa-cc-mastercard"></i><i class="fa-brands fa-cc-amex"></i><i class="fa-brands fa-cc-paypal"></i><i class="fa-brands fa-cc-apple-pay"></i></span>
+      <p>Demo store: no payment is taken and no card details are collected. Please do not enter real card details anywhere on this site.</p>
+    </div>
+    <button class="button dark" type="submit">Place order</button>
+  </form>
+  <aside id="summary" aria-live="polite"></aside>
+</section>
+<script src="script.js"></script>
+<script src="checkout.js"></script>
+</body></html>
