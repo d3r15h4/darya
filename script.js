@@ -8,8 +8,8 @@ const PRODUCTS = [
   { name: "The Mehreen Abaya", price: 44.99, img: "image4.jpg",        cat: "abayas" },
   { name: "The Layla Set",     price: 72.99, img: "laylaset.jpg",      cat: "sets" },
   { name: "The Amal Dress",    price: 38.99, img: "amaldress.jpg",     cat: "dresses" },
-  { name: "The Safiya Hijab",  price: 19.99, img: "safiyahijab.jpg",   cat: "accessories" },
-  { name: "The Zainab Shawl",  price: 29.99, img: "zainabshawl.jpg",   cat: "accessories" }
+  { name: "The Safiya Hijab",  price: 19.99, img: "safiyah.jpg",   cat: "accessories" },
+  { name: "The Zainab Shawl",  price: 29.99, img: "zainab.jpg",   cat: "accessories" }
 ];
 const NAV = [["Home", "index"], ["Shop", "shop"], ["About", "about"], ["Contact", "contact"]];
 const page = (location.pathname.split("/").pop() || "index.html").replace(".html", "") || "index";
