@@ -2,12 +2,14 @@
 
 // Edit products here once; the homepage and shop both use this list.
 const PRODUCTS = [
-  { name: "The Amina Abaya",   price: 74.99, img: "image1.jpg" },
-  { name: "The Hajara Set",    price: 84.99, img: "image2.jpg" },
-  { name: "The Noor Dress",    price: 64.99, img: "image3.jpg" },
-  { name: "The Mehreen Abaya", price: 44.99, img: "image4.jpg" },
-  { name: "The Layla Set",     price: 72.99, img: "laylaset.jpg" },
-  { name: "The Amal Dress",    price: 38.99, img: "amaldress.jpg" }
+  { name: "The Amina Abaya",   price: 74.99, img: "image1.jpg",        cat: "abayas" },
+  { name: "The Hajara Set",    price: 84.99, img: "image2.jpg",        cat: "sets" },
+  { name: "The Noor Dress",    price: 64.99, img: "image3.jpg",        cat: "dresses" },
+  { name: "The Mehreen Abaya", price: 44.99, img: "image4.jpg",        cat: "abayas" },
+  { name: "The Layla Set",     price: 72.99, img: "laylaset.jpg",      cat: "sets" },
+  { name: "The Amal Dress",    price: 38.99, img: "amaldress.jpg",     cat: "dresses" },
+  { name: "The Safiya Hijab",  price: 19.99, img: "safiyahijab.jpg",   cat: "accessories" },
+  { name: "The Zainab Shawl",  price: 29.99, img: "zainabshawl.jpg",   cat: "accessories" }
 ];
 const NAV = [["Home", "index"], ["Shop", "shop"], ["About", "about"], ["Contact", "contact"]];
 const page = (location.pathname.split("/").pop() || "index.html").replace(".html", "") || "index";
@@ -22,7 +24,7 @@ document.body.insertAdjacentHTML("afterbegin", `
   <nav>${links()}</nav>
   <div class="header-icons">
     <a href="#" aria-label="Wishlist"><i class="fa-regular fa-heart"></i></a>
-    <a href="#" aria-label="Bag"><i class="fa-solid fa-bag-shopping"></i></a>
+    <a href="#" id="bag" aria-label="Open bag"><i class="fa-solid fa-bag-shopping"></i><span id="count"></span></a>
   </div>
 </header>`);
 document.body.insertAdjacentHTML("beforeend", `
@@ -39,11 +41,16 @@ addEventListener("scroll", onScroll);
 onScroll();
 
 // Products (home = first 4, shop = all, with search + sort)
+const CATS = [["All", "shop"], ["Abayas", "abayas"], ["Dresses", "dresses"], ["Sets", "sets"], ["Accessories", "accessories"]];
+const cat = document.body.dataset.category;
+if (cat) header.insertAdjacentHTML("afterend", `<section class="page-hero"><h1>${document.body.dataset.title}</h1><p>${document.body.dataset.blurb}</p></section><section class="shop-toolbar"><input type="search" id="search" placeholder="Search ${document.body.dataset.title.toLowerCase()}..." aria-label="Search products"><select id="sort" aria-label="Sort products"><option value="new">Newest</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select></section><section class="section white"><div class="product-grid" data-products=""></div></section>`);
+document.querySelector(".shop-toolbar")?.insertAdjacentHTML("beforebegin", `<div class="cats">${CATS.map(([l, p]) => `<a href="${p}.html"${p === page ? ' class="active"' : ""}>${l}</a>`).join("")}</div>`);
 const grid = document.querySelector("[data-products]");
 if (grid) {
-  const card = p => `<article class="product-card"><div class="thumb"><img src="images/${p.img}" alt="${p.name}" loading="lazy"><button class="wish" aria-label="Add ${p.name} to wishlist"><i class="fa-regular fa-heart"></i></button></div><h3>${p.name}</h3><p>£${p.price.toFixed(2)}</p></article>`;
+  const card = p => `<article class="product-card"><div class="thumb"><img src="images/${p.img}" alt="${p.name}" loading="lazy"><button class="wish" aria-label="Add ${p.name} to wishlist"><i class="fa-regular fa-heart"></i></button></div><h3>${p.name}</h3><p>£${p.price.toFixed(2)}</p><button class="add" data-add="${p.name}">Add to bag</button></article>`;
   const draw = l => grid.innerHTML = l.length ? l.map(card).join("") : '<p class="empty">No products match your search.</p>';
-  draw(PRODUCTS.slice(0, +grid.dataset.products || PRODUCTS.length));
+  const base = PRODUCTS.filter(p => !cat || p.cat === cat);
+  draw(base.slice(0, +grid.dataset.products || base.length));
 
   grid.addEventListener("click", e => {
     const b = e.target.closest(".wish");
@@ -54,7 +61,7 @@ if (grid) {
   if (search && sort) {
     const update = () => {
       const q = search.value.toLowerCase().trim();
-      const l = PRODUCTS.filter(p => p.name.toLowerCase().includes(q));
+      const l = base.filter(p => p.name.toLowerCase().includes(q));
       if (sort.value === "low") l.sort((a, b) => a.price - b.price);
       if (sort.value === "high") l.sort((a, b) => b.price - a.price);
       draw(l);
@@ -69,3 +76,45 @@ document.querySelector(".contact-form")?.addEventListener("submit", e => {
   e.preventDefault();
   e.target.innerHTML = "<p>Thank you, we'll be in touch soon.</p>";
 });
+
+// Shopping bag (saved in the browser so it survives page changes)
+const FREE_DELIVERY = 75;
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem("darya-cart")) || []; } catch (e) {}
+const money = n => "£" + n.toFixed(2);
+document.body.insertAdjacentHTML("beforeend", '<div id="scrim"></div><aside id="drawer" aria-label="Shopping bag"></aside>');
+const drawer = document.getElementById("drawer");
+const toggle = open => document.body.classList.toggle("cart-open", open);
+
+function renderCart() {
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const n = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById("count").textContent = n || "";
+  drawer.innerHTML = `
+    <div class="drawer-head"><h3>Your bag (${n})</h3><button data-close aria-label="Close bag"><i class="fa-solid fa-xmark"></i></button></div>
+    <p class="ship">${total >= FREE_DELIVERY ? "You've unlocked free UK delivery" : `Add ${money(FREE_DELIVERY - total)} more for free UK delivery`}</p>
+    <div class="drawer-items">${cart.length ? cart.map(i => `
+      <div class="line"><img src="images/${i.img}" alt="">
+        <div><h4>${i.name}</h4><p>${money(i.price)}</p>
+          <div class="qty"><button data-dec="${i.name}" aria-label="Decrease quantity">−</button><span>${i.qty}</span><button data-inc="${i.name}" aria-label="Increase quantity">+</button></div></div>
+        <button data-rm="${i.name}" aria-label="Remove ${i.name}"><i class="fa-regular fa-trash-can"></i></button>
+      </div>`).join("") : '<p class="empty-bag">Your bag is empty.</p>'}</div>
+    <div class="drawer-foot"><div class="total"><span>Subtotal</span><span>${money(total)}</span></div>
+      <button class="button dark" data-checkout>Checkout</button></div>`;
+}
+function save() { try { localStorage.setItem("darya-cart", JSON.stringify(cart)); } catch (e) {} renderCart(); }
+
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-add],[data-inc],[data-dec],[data-rm],[data-close],[data-checkout],#bag,#scrim");
+  if (!el) return;
+  const d = el.dataset, find = n => cart.find(i => i.name === n);
+  if (el.id === "bag") { e.preventDefault(); toggle(true); }
+  else if (el.id === "scrim" || "close" in d) toggle(false);
+  else if ("checkout" in d) alert("This is a demo store, so checkout isn't connected yet.");
+  else if (d.add) { const p = PRODUCTS.find(x => x.name === d.add), l = find(p.name); l ? l.qty++ : cart.push({ ...p, qty: 1 }); save(); toggle(true); }
+  else if (d.inc) { find(d.inc).qty++; save(); }
+  else if (d.dec) { const l = find(d.dec); if (--l.qty < 1) cart = cart.filter(i => i !== l); save(); }
+  else if (d.rm) { cart = cart.filter(i => i.name !== d.rm); save(); }
+});
+document.addEventListener("keydown", e => e.key === "Escape" && toggle(false));
+renderCart();
