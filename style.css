@@ -1,621 +1,109 @@
-/* ========================================
-   NOOREVA STUDIO
-   Main Stylesheet
-======================================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:'Inter',sans-serif;
-    background:#F8F5F2;
-    color:#1F1F1F;
-    overflow-x:hidden;
-}
-
-/* ========================================
-   ANNOUNCEMENT BAR
-======================================== */
-
-.announcement{
-    background:#1F1F1F;
-    color:white;
-    text-align:center;
-    padding:12px;
-    font-size:13px;
-    letter-spacing:2px;
-}
-
-/* ========================================
-   HEADER
-======================================== */
-
-header{
-    position:fixed;
-    top:40px;
-    left:0;
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:25px 8%;
-    z-index:1000;
-    transition:.4s;
-}
-
-header.scrolled{
-    background:white;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-    padding:18px 8%;
-}
-
-./* ===== LOGO ===== */
-
-.logo{
-    display:flex;
-    align-items:center;
-    text-decoration:none;
-    z-index:1001;
-    flex-shrink:0;
-}
-
-.logo-image{
-    width:420px;      /* Increase or decrease this value */
-    height:auto;
-    display:block;
-    transition:all .35s ease;
-}
-
-header.scrolled .logo-image{
-    width:360px;
-}
-
-.brand-signature{
-
-margin-top:8px;
-
-margin-left:8px;
-
-font-size:14px;
-
-font-family:"Playfair Display",serif;
-
-font-style:italic;
-
-letter-spacing:1px;
-
-color:white;
-
-opacity:.9;
-
-transition:.3s;
-
-}
-
-header.scrolled .brand-signature{
-
-color:#1F1F1F;
-header.scrolled .logo-image{
-
-width:190px;
-
-}
-   
-}
-
-nav{
-    display:flex;
-    gap:35px;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    font-size:13px;
-    transition:.3s;
-    position:relative;
-}
-
-header.scrolled nav a{
-    color:#1F1F1F;
-}
-
-nav a::after{
-    content:'';
-    position:absolute;
-    left:0;
-    bottom:-6px;
-    width:0;
-    height:2px;
-    background:#B08D57;
-    transition:.35s;
-}
-
-nav a:hover::after{
-    width:100%;
-}
-
-/* ========================================
-   HERO
-======================================== */
-
-.hero{
-    position:relative;
-    height:100vh;
-}
-
-.hero-image{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.overlay{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.35);
-}
-
-.hero-content{
-    position:absolute;
-    top:50%;
-    left:8%;
-    transform:translateY(-50%);
-    color:white;
-    max-width:650px;
-}
-
-.small-text{
-    letter-spacing:4px;
-    font-size:13px;
-    margin-bottom:20px;
-}
-
-.hero h1{
-    font-family:"Playfair Display",serif;
-    font-size:72px;
-    line-height:1.1;
-    margin-bottom:25px;
-}
-
-.hero p{
-    font-size:18px;
-    line-height:1.8;
-    margin-bottom:35px;
-}
-
-/* ========================================
-   BUTTONS
-======================================== */
-
-.button{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background:white;
-    color:#1F1F1F;
-    text-decoration:none;
-    padding:18px 38px;
-    border-radius:50px;
-    font-weight:600;
-    transition:.35s;
-}
-
-.button:hover{
-    background:#B08D57;
-    color:white;
-    transform:translateY(-4px);
-}
-
-/* ========================================
-   SECTION TITLES
-======================================== */
-
-.section-title{
-    text-align:center;
-    margin-bottom:70px;
-}
-
-.section-title p{
-    letter-spacing:4px;
-    color:#888;
-    font-size:13px;
-    margin-bottom:12px;
-}
-
-.section-title h2{
-    font-family:"Playfair Display",serif;
-    font-size:48px;
-}
-
-/* ========================================
-   COLLECTIONS
-======================================== */
-
-.collections{
-    padding:120px 8%;
-}
-
-.collection-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:35px;
-}
-
-.collection-card{
-    position:relative;
-    overflow:hidden;
-    border-radius:8px;
-}
-
-.collection-card img{
-    width:100%;
-    height:520px;
-    object-fit:cover;
-    transition:.6s;
-    display:block;
-}
-
-.collection-card:hover img{
-    transform:scale(1.08);
-}
-
-.collection-text{
-    position:absolute;
-    left:30px;
-    bottom:30px;
-    color:white;
-}
-
-.collection-text h3{
-    font-family:"Playfair Display",serif;
-    font-size:36px;
-}
-
-/* ========================================
-   PRODUCTS
-======================================== */
-
-.products{
-    padding:120px 8%;
-    background:white;
-}
-
-.product-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:35px;
-}
-
-.product-card{
-    transition:.35s;
-    cursor:pointer;
-}
-
-.product-card:hover{
-    transform:translateY(-8px);
-}
-
-.product-card img{
-    width:100%;
-    height:380px;
-    object-fit:cover;
-    transition:.5s;
-}
-
-.product-card:hover img{
-    transform:scale(1.05);
-}
-
-.product-top{
-    display:flex;
-    justify-content:flex-end;
-    margin:15px 0;
-}
-
-.product-top i{
-    font-size:18px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.product-top i:hover{
-    color:#B08D57;
-}
-
-.product-card h3{
-    font-family:"Playfair Display",serif;
-    font-size:24px;
-    margin-top:18px;
-}
-
-.product-card p{
-    color:#777;
-    margin-top:8px;
-}
-
-/* ========================================
-   STORY
-======================================== */
-
-.story{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:80px;
-    align-items:center;
-    padding:120px 8%;
-    background:#F8F5F2;
-}
-
-.story img{
-    width:100%;
-    height:650px;
-    object-fit:cover;
-}
-
-.story-small{
-    letter-spacing:3px;
-    color:#888;
-    margin-bottom:18px;
-}
-
-.story h2{
-    font-family:"Playfair Display",serif;
-    font-size:50px;
-    margin-bottom:30px;
-}
-
-.story-text{
-    color:#555;
-    line-height:1.9;
-    margin-bottom:40px;
-}
-
-/* ========================================
-   NEWSLETTER
-======================================== */
-
-.newsletter{
-    padding:120px 8%;
-    text-align:center;
-    background:white;
-}
-
-.newsletter-small{
-    letter-spacing:4px;
-    color:#888;
-}
-
-.newsletter h2{
-    font-family:"Playfair Display",serif;
-    font-size:52px;
-    margin:20px 0;
-}
-
-.newsletter-text{
-    max-width:650px;
-    margin:0 auto 45px;
-    line-height:1.8;
-    color:#666;
-}
-
-.newsletter-form{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.newsletter-form input{
-    width:420px;
-    padding:18px;
-    border:1px solid #ddd;
-    font-size:16px;
-}
-
-.newsletter-form button{
-    padding:18px 40px;
-    border:none;
-    background:#1F1F1F;
-    color:white;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.newsletter-form button:hover{
-    background:#B08D57;
-}
-
-/* ========================================
-   FOOTER
-======================================== */
-
-footer{
-    background:#1F1F1F;
-    color:white;
-    text-align:center;
-    padding:90px 8%;
-}
-
-footer h2{
-    font-family:"Playfair Display",serif;
-    font-size:40px;
-    margin-bottom:20px;
-}
-
-.footer-links{
-    display:flex;
-    justify-content:center;
-    gap:35px;
-    margin:40px 0;
-    flex-wrap:wrap;
-}
-
-.footer-links a{
-    color:white;
-    text-decoration:none;
-}
-
-.footer-links a:hover{
-    color:#B08D57;
-}
-
-.copyright{
-    color:#888;
-}
-
-/* ========================================
-   SHOP PAGE
-======================================== */
-
-.shop-hero{
-    padding:180px 8% 80px;
-    text-align:center;
-    background:#F8F5F2;
-}
-
-.shop-hero h1{
-    font-family:"Playfair Display",serif;
-    font-size:64px;
-    margin-bottom:20px;
-}
-
-.shop-hero p{
-    max-width:650px;
-    margin:auto;
-    line-height:1.8;
-    color:#666;
-}
-
-.shop-toolbar{
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-    flex-wrap:wrap;
-    padding:40px 8%;
-    background:white;
-}
-
-.shop-toolbar input{
-    flex:1;
-    min-width:260px;
-    padding:18px;
-    border:1px solid #ddd;
-}
-
-.shop-toolbar select{
-    padding:18px;
-    border:1px solid #ddd;
-    background:white;
-}
-
-.shop-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:35px;
-    padding:80px 8%;
-    background:white;
-}
-
-/* ========================================
-   RESPONSIVE
-======================================== */
+/* DARYA by Derisha - main stylesheet */
+:root{--ink:#1F1F1F;--gold:#B08D57;--cream:#F8F5F2;--muted:#777;--serif:"Playfair Display",serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* announcement + header */
+.announcement{background:var(--ink);color:#fff;text-align:center;height:40px;line-height:40px;font-size:13px;letter-spacing:2px}
+header{position:fixed;top:40px;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 8%;z-index:1000;transition:.4s}
+header.scrolled,header.solid{background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+header.scrolled{top:0;padding:14px 8%}
+.logo-image{width:170px;height:auto;transition:.35s}
+header.scrolled .logo-image{width:130px}
+nav{display:flex;gap:35px}
+nav a,.header-icons a{color:#fff;text-decoration:none;transition:.3s}
+header.scrolled a,header.solid a{color:var(--ink)}
+nav a{letter-spacing:2px;text-transform:uppercase;font-size:13px;position:relative}
+nav a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--gold);transition:.35s}
+nav a:hover::after,nav a.active::after{width:100%}
+.header-icons{display:flex;gap:25px;font-size:20px}
+header .header-icons a:hover{color:var(--gold)}
+
+/* hero */
+.hero{position:relative;height:calc(100vh - 40px);min-height:520px}
+.hero-image{width:100%;height:100%;object-fit:cover}
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+.hero-content{position:absolute;top:50%;left:8%;right:8%;transform:translateY(-50%);color:#fff;max-width:650px}
+.small-text{letter-spacing:4px;font-size:13px;margin-bottom:20px}
+.hero h1{font-family:var(--serif);font-size:clamp(42px,7vw,72px);line-height:1.1;margin-bottom:25px}
+.hero p:not(.small-text){font-size:18px;line-height:1.8;margin-bottom:35px}
+
+/* buttons */
+.button{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);text-decoration:none;padding:18px 38px;border-radius:50px;font-weight:600;border:none;cursor:pointer;font-size:16px;transition:.35s}
+.button:hover{background:var(--gold);color:#fff;transform:translateY(-4px)}
+.button.dark{background:var(--ink);color:#fff}
+
+/* sections */
+.section{padding:110px 8%}
+.section.white{background:#fff}
+.section-title{text-align:center;margin-bottom:60px}
+.section-title p,.story-small{letter-spacing:4px;color:#888;font-size:13px;margin-bottom:12px}
+.section-title h2,.story h2{font-family:var(--serif);font-size:clamp(32px,5vw,48px)}
+
+/* collections */
+.collection-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+.collection-card{position:relative;display:block;overflow:hidden;border-radius:8px;color:#fff;text-decoration:none}
+.collection-card::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(0,0,0,.55))}
+.collection-card img{width:100%;height:520px;object-fit:cover;transition:.6s}
+.collection-card:hover img{transform:scale(1.06)}
+.collection-text{position:absolute;left:30px;bottom:30px;z-index:1}
+.collection-text h3{font-family:var(--serif);font-size:36px}
+
+/* products */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:35px}
+.thumb{position:relative;overflow:hidden;aspect-ratio:3/4;background:#eee}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.product-card:hover .thumb img{transform:scale(1.05)}
+.wish{position:absolute;top:12px;right:12px;width:38px;height:38px;border:none;border-radius:50%;background:#fff;cursor:pointer;font-size:16px;transition:.3s}
+.wish:hover,.wish .fa-solid{color:var(--gold)}
+.product-card h3{font-family:var(--serif);font-size:22px;margin-top:16px}
+.product-card p{color:var(--muted);margin-top:6px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted)}
+
+/* story / about */
+.story{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.story img{width:100%;height:650px;object-fit:cover}
+.story h2{margin-bottom:30px;font-size:clamp(32px,4.5vw,50px)}
+.story-text p{color:#555;line-height:1.9;margin-bottom:18px}
+.story .button{margin-top:20px}
+
+/* inner pages */
+.page-hero{padding:170px 8% 70px;text-align:center}
+.page-hero h1{font-family:var(--serif);font-size:clamp(40px,6vw,64px);margin-bottom:20px}
+.page-hero p{max-width:650px;margin:auto;line-height:1.8;color:#666}
+.shop-toolbar{display:flex;gap:20px;flex-wrap:wrap;padding:30px 8%;background:#fff}
+.shop-toolbar input,.shop-toolbar select,.contact-form input,.contact-form textarea{padding:16px;border:1px solid #ddd;font:inherit;background:#fff}
+.shop-toolbar input{flex:1;min-width:240px}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.contact-wrap h2{font-family:var(--serif);font-size:32px;margin-bottom:20px}
+.contact-wrap p{color:#555;line-height:1.9;margin-bottom:10px}
+.contact-form{display:grid;gap:16px}
+.contact-form textarea{min-height:150px;resize:vertical}
+.contact-form .button{justify-self:start}
+
+/* footer */
+footer{background:var(--ink);color:#fff;text-align:center;padding:80px 8% 40px}
+footer h2{font-family:var(--serif);font-size:40px}
+.footer-sig{font-family:var(--serif);font-style:italic;color:#b9b9b9;margin-top:8px}
+.footer-links{display:flex;justify-content:center;gap:35px;margin:35px 0;flex-wrap:wrap}
+.footer-links a{color:#fff;text-decoration:none}
+.footer-links a:hover{color:var(--gold)}
+.copyright{color:#888;font-size:14px}
 
 @media(max-width:900px){
-
-header{
-    flex-direction:column;
-    gap:20px;
-    top:40px;
+header{flex-wrap:wrap;padding:14px 5%}
+header.scrolled{padding:10px 5%}
+.logo-image{width:120px}
+header.scrolled .logo-image{width:100px}
+nav{order:3;width:100%;justify-content:center;gap:18px}
+.section{padding:80px 6%}
+.collection-grid,.story,.contact-wrap{grid-template-columns:1fr}
+.story,.contact-wrap{gap:40px}
+.collection-card img{height:420px}
+.story img{height:420px}
+.page-hero{padding-top:190px}
 }
-
-nav{
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:18px;
-}
-
-.hero h1{
-    font-size:46px;
-}
-
-.collection-grid{
-    grid-template-columns:1fr;
-}
-
-.collection-card img{
-    height:420px;
-}
-
-.story{
-    grid-template-columns:1fr;
-}
-
-.story img{
-    height:420px;
-}
-
-.newsletter h2{
-    font-size:40px;
-}
-
-.shop-hero h1{
-    font-size:46px;
-}
-
-}
-.header-icons{
-
-display:flex;
-
-gap:25px;
-
-align-items:center;
-
-}
-
-.header-icons a{
-
-text-decoration:none;
-
-color:white;
-
-font-size:22px;
-
-transition:.3s;
-
-}
-
-header.scrolled .header-icons a{
-
-color:#1F1F1F;
-
-}
-
-.header-icons a:hover{
-
-transform:translateY(-3px);
-
-color:#B08D57;
-
-}
-.footer-signature{
-
-margin-top:10px;
-
-font-family:"Playfair Display",serif;
-
-font-style:italic;
-
-color:#b9b9b9;
-
-}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
