@@ -3,92 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Shop | DARYA by Derisha</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
+<body data-solid>
 
-<body>
-
-<div class="announcement">
-Complimentary UK Delivery on Orders Over £75
-</div>
-
-<header>
-
-<a href="index.html" class="logo">
-    <img src="images/logo.png" alt="Darya Logo" class="logo-image">
-</a>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="shop.html">Shop</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-</nav>
-
-</header>
-
-<section class="shop-hero">
-
-<h1>Shop Our Collection</h1>
-
-<p>
-Discover timeless modestwear designed for every season.
-</p>
-
+<section class="page-hero">
+  <h1>Shop Our Collection</h1>
+  <p>Discover timeless modestwear designed for every season.</p>
 </section>
 
 <section class="shop-toolbar">
-
-<input
-type="text"
-placeholder="Search products...">
-
-<select>
-<option>Newest</option>
-<option>Price: Low to High</option>
-<option>Price: High to Low</option>
-<option>Best Selling</option>
-</select>
-
+  <input type="search" id="search" placeholder="Search products..." aria-label="Search products">
+  <select id="sort" aria-label="Sort products">
+    <option value="new">Newest</option>
+    <option value="low">Price: Low to High</option>
+    <option value="high">Price: High to Low</option>
+  </select>
 </section>
 
-<section class="shop-grid">
-
-<div class="product-card">
-<img src="images/image1.jpg">
-<h3>The Amina Abaya</h3>
-<p>£74.99</p>
-</div>
-
-<div class="product-card">
-<img src="images/laylaset.jpg">
-<h3>The Layla Set</h3>
-<p>£72.99</p>
-</div>
-
-<div class="product-card">
-<img src="images/image3.jpg">
-<h3>The Noor Dress</h3>
-<p>£64.99</p>
-</div>
-
-<div class="product-card">
-<img src="images/amaldress.jpg">
-<h3>The Amal Dress</h3>
-<p>£38.99</p>
-</div>
-
+<section class="section white">
+  <div class="product-grid" data-products=""></div>
 </section>
 
 <script src="script.js"></script>
-
 </body>
 </html>
