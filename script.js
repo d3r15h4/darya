@@ -54,9 +54,9 @@ addEventListener("scroll", onScroll);
 onScroll();
 
 // Products (home = first 4, shop = all, with search + sort)
- (document.body.hasAttribute("data-product")) {
+if (document.body.hasAttribute("data-product")) {
   const p = PRODUCTS.find(x => x.slug === new URLSearchParams(location.search).get("p"));
-   (p) document.title = `${p.name} | DARYA by Derisha`;
+  if (p) document.title = `${p.name} | DARYA by Derisha`;
   header.insertAdjacentHTML("afterend", p ? `<section class="section pdp">
     <img src="images/${p.img}" alt="${p.name}">
     <div>
@@ -73,10 +73,10 @@ onScroll();
 }
 const CATS = [["All", "shop"], ["Abayas", "abayas"], ["Dresses", "dresses"], ["Sets", "sets"], ["Accessories", "accessories"]];
 const cat = document.body.dataset.category;
- (cat) header.insertAdjacentHTML("afterend", `<section class="page-hero"><h1>${document.body.dataset.title}</h1><p>${document.body.dataset.blurb}</p></section><section class="shop-toolbar"><input type="search" id="search" placeholder="Search ${document.body.dataset.title.toLowerCase()}..." aria-label="Search products"><select id="sort" aria-label="Sort products"><option value="new">Newest</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select></section><section class="section white"><div class="product-grid" data-products=""></div></section>`);
+ if (cat) header.insertAdjacentHTML("afterend", `<section class="page-hero"><h1>${document.body.dataset.title}</h1><p>${document.body.dataset.blurb}</p></section><section class="shop-toolbar"><input type="search" id="search" placeholder="Search ${document.body.dataset.title.toLowerCase()}..." aria-label="Search products"><select id="sort" aria-label="Sort products"><option value="new">Newest</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select></section><section class="section white"><div class="product-grid" data-products=""></div></section>`);
 document.querySelector(".shop-toolbar")?.insertAdjacentHTML("beforebegin", `<div class="cats">${CATS.map(([l, p]) => `<a href="${p}.html"${p === page ? ' class="active"' : ""}>${l}</a>`).join("")}</div>`);
 const grid = document.querySelector("[data-products]");
- (grid) {
+ if (grid) {
   const card = p => `<article class="product-card"><div class="thumb"><a href="product.html?p=${p.slug}"><img src="images/${p.img}" alt="${p.name}" loading="lazy"></a><button class="wish" data-wish="${p.name}" aria-label="Save ${p.name} to wishlist"><i class="${wish.includes(p.name) ? "fa-solid" : "fa-regular"} fa-heart"></i></button></div><h3><a href="product.html?p=${p.slug}">${p.name}</a></h3><p>£${p.price.toFixed(2)}</p>${p.cat === "accessories" ? `<button class="add" data-add="${p.name}">Add to bag</button>` : `<a class="add" href="product.html?p=${p.slug}">Choose size</a>`}</article>`;
   const draw = l => grid.innerHTML = l.length ? l.map(card).join("") : EMPTY;
   const base = PRODUCTS.filter(p => wishPage ? wish.includes(p.name) : !cat || p.cat === cat);
@@ -84,12 +84,12 @@ const grid = document.querySelector("[data-products]");
 
 
   const search = document.getElementById("search"), sort = document.getElementById("sort");
-   (search && sort) {
+   if (search && sort) {
     const update = () => {
       const q = search.value.toLowerCase().trim();
       const l = base.filter(p => p.name.toLowerCase().includes(q));
-       (sort.value === "low") l.sort((a, b) => a.price - b.price);
-       (sort.value === "high") l.sort((a, b) => b.price - a.price);
+       if (sort.value === "low") l.sort((a, b) => a.price - b.price);
+       if (sort.value === "high") l.sort((a, b) => b.price - a.price);
       draw(l);
     };
     search.addEventListener("input", update);
@@ -128,13 +128,17 @@ function renderCart() {
     <div class="drawer-foot"><div class="total"><span>Subtotal</span><span>${money(total)}</span></div>
       <button class="button dark" data-checkout>Checkout</button></div>`;
 }
-function save() { try { localStorage.setItem("darya-cart", JSON.stringy(cart)); } catch (e) {} renderCart(); }
-
+function save() {
+  try {
+    localStorage.setItem("darya-cart", JSON.stringify(cart));
+  } catch (e) {}
+  renderCart();
+}
 document.addEventListener("click", e => {
   const el = e.target.closest("[data-add],[data-inc],[data-dec],[data-rm],[data-close],[data-checkout],[data-wish],#bag,#scrim");
-   (!el) return;
+   if (!el) return;
   const d = el.dataset, find = n => cart.find(i => i.name === n);
-   (el.id === "bag") { e.preventDefault(); toggle(true); }
+   if (el.id === "bag") { e.preventDefault(); toggle(true); }
   else if (el.id === "scrim" || "close" in d) toggle(false);
   else if ("checkout" in d) alert("This is a demo store, so checkout isn't connected yet.");
   else if (d.wish) toggleWish(d.wish, el);
